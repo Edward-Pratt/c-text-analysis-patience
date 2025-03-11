@@ -2577,6 +2577,7 @@ carroter
 carrying
 cartbote
 carthamic
+carthorse
 cartload
 cartographically
 cartulary
@@ -4085,6 +4086,7 @@ damageable
 damascener
 damewort
 dammish
+damned
 damnify
 dampang
 dampness
@@ -4269,6 +4271,7 @@ deltoidal
 delundung
 delve
 demagogism
+demand
 demandingly
 demark
 dement
@@ -11195,6 +11198,7 @@ orbit
 orbitofrontal
 orbitozygomatic
 orchat
+orchestra
 orchestral
 orchestrion
 orchideously
