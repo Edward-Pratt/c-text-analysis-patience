@@ -11,6 +11,6 @@ int jqk(int visible[], int size);
 
 int play(int deck[], int verbose);
 
-int *shuffle_deck(int deck[]);
+int *shuffle_deck(int deck[], int seed);
 
 #endif

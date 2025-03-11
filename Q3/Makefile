@@ -8,6 +8,11 @@ LDLIBS = -lm -lgsl -lgslcblas
 patience: patience.o patience_game.o ../shuffle/shuffle.o
 	$(CC) $(CFLAGS) $(LDFLAGS) patience.o patience_game.o ../shuffle/shuffle.o -o patience $(LDLIBS)
 
+pstatistics: pstatistics.o patience_game.o ../shuffle/shuffle.o
+	$(CC) $(CFLAGS) $(LDFLAGS) pstatistics.o patience_game.o ../shuffle/shuffle.o -o pstatistics $(LDLIBS)
+
+pstatistics.o: pstatistics.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -c pstatistics.c
 
 patience.o: patience.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -c patience.c

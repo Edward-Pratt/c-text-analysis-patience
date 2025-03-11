@@ -11,11 +11,18 @@ int main(int argc, char **argv){
 int deck[52] = {10, 4, 9, 8, 5, 1, 2, 12, 9, 11, 2, 12, 1, 3, 12, 10, 6, 13, 7, 6, 10,
 4, 7, 5, 8, 2, 4, 1, 3, 9, 5, 4, 6, 9, 11, 10, 13, 11, 11, 1, 12, 3, 13,
 2, 5, 13, 7, 3, 7, 6, 8, 8};
+	
 
+	int seed;
+	if (argc > 1){
+		seed = atoi(argv[1]);
+	} else {
+		seed = time(NULL);
+	}
 
-	int *shuffled_deck = shuffle_deck(deck);
+	shuffle_deck(deck, seed);
 
-	int result = play(shuffled_deck, 1);
+	int result = play(deck, 1);
 
 	if (result == 0){
 		printf("Player Wins!\n");

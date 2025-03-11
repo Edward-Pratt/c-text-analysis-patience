@@ -102,9 +102,8 @@ int play(int deck[], int verbose){
 }
 
 
-int *shuffle_deck(int deck[]){
+int *shuffle_deck(int deck[], int seed){
 	gsl_rng *r;
-	int seed = -1;
 	r = shuffle(deck, 52, seed);
 	return deck;
 }
