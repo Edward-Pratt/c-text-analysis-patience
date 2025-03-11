@@ -18,3 +18,7 @@ patience_game.o: patience_game.c
 
 ../shuffle/shuffle.o: ../shuffle/shuffle.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -c shuffle.c
+
+
+clean:
+	rm -rf *.o patience

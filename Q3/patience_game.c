@@ -1,4 +1,4 @@
-#include "patience.h"
+#include "patience_game.h"
 
 
 #define DECK_SIZE 52
@@ -40,36 +40,62 @@ int jqk(int visible[], int size){
 
 int play(int deck[], int verbose){
 	int visible[MAX_PILES] = {0};
-	int deck_index = 0, num_piles = 0;
+	int deck_index = 0, num_piles = 0, cards_covered=0;
 
 	while (deck_index < DECK_SIZE){
-		if (num_piles >= MAX_PILES){ 
-			return DECK_SIZE - deck_index; /* Happens on Loss */
+		if(!cards_covered){
+			visible[num_piles++] = deck[deck_index++]; /* Adds a new pile */
 		}
-		visible[num_piles++] = deck[deck_index++]; /* Adds a new pile */
-
+		cards_covered=0;
 		if (verbose){
 			int i;
 			for (i=0; i < num_piles; i++){
-				printf("%d ", visible[i]);
+				printf("%2d ", visible[i]);
 			}
 			printf("\n");
 		}
 
-		int x, y;
-		while(add_to_11(visible, num_piles, &x, &y) || jqk(visible, num_piles)){
-			if (add_to_11(visible, num_piles, &x, &y)){
-				visible[x] = deck_index < DECK_SIZE ? deck[deck_index++] : 0;
-				visible[y] = deck_index < DECK_SIZE ? deck[deck_index++] : 0;
-			}
-			if(jqk(visible, num_piles)){
-				int i;
-				for(i = 0; i < num_piles; i++){
-					if(visible[i] == 11 || visible[i] == 12 || visible[i] == 13){
-						visible[i] = deck_index < DECK_SIZE ? deck[deck_index++] : 0;
-					}
+		if(jqk(visible, num_piles)){
+			int foundJ = -1, foundQ = -1, foundK = -1;
+			int i;
+			for(i = 0; i < num_piles; i++){
+				if(visible[i] == 11 && foundJ == -1){
+					foundJ = i;
+				} else if(visible[i] == 12 && foundQ == -1){
+					foundQ = i;
+				} else if(visible[i] == 13 && foundK == -1){
+					foundK = i;
 				}
 			}
+			if (foundJ != -1 && foundQ != -1 && foundK != -1){
+				if (deck_index < DECK_SIZE){
+				       	visible[foundJ] = deck[deck_index++];
+				} else visible[foundJ] = 0;
+
+			        if (deck_index < DECK_SIZE){
+				       	visible[foundQ] = deck[deck_index++];
+				} else visible[foundQ] = 0;
+
+			        if (deck_index < DECK_SIZE){ visible[foundK] = deck[deck_index++];
+				} else visible[foundK] = 0;
+
+			
+				cards_covered = 1;
+				continue;
+				}		
+		}
+		
+		int x, y;
+		if(add_to_11(visible, num_piles, &x, &y)){
+			visible[x] = deck_index < DECK_SIZE ? deck[deck_index++] : 0;
+			visible[y] = deck_index < DECK_SIZE ? deck[deck_index++] : 0;
+			cards_covered = 1;
+			continue;
+			}
+
+
+		if (num_piles >= MAX_PILES){ 
+			return DECK_SIZE - deck_index; /* Happens on Loss */
 		}
 	}
 	return 0; /* On Win */
