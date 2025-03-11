@@ -27,10 +27,10 @@ int *many_plays(int N){
 
 
 int main() {
-    int N = 100000; // Play 10,000 games
+    int N = 1000000; // Play 10,000 games
     int *results = many_plays(N);
 
-    // Print statistics
+    /* Print statistics
     printf("Cards Left | Games Ended\n");
     printf("------------------------\n");
     for (int i = 0; i <= DECK_SIZE; i++) {
@@ -38,6 +38,15 @@ int main() {
             printf("%10d | %d\n", i, results[i]);
         }
     }
+    */
+
+    double y[DECK_SIZE+1] = {0};
+    int i;
+    for (i = 0; i <= DECK_SIZE; i++){
+	    y[i] = (double)results[i] / N*100;
+
+    }
+    histogram(results, y, DECK_SIZE, 50);
 
     return 0;
 }
