@@ -24,10 +24,11 @@ AnagramList *make_anagram_list(char **words, int n){
      int i;
      for (i=1; i<n; i++) {
          insert_word(&list, words[i]);
-
+	/*
          if (i % 1000 == 0) {
              printf("Processing word %d of %d...\n", i, n);
          }
+	 */
      }
      return list;
 };

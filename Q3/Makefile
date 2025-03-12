@@ -3,7 +3,7 @@ CFLAGS = -std=c99
 LDFLAGS = -L.
 LDLIBS = -lm -lgsl -lgslcblas
 
-
+all: patience pstatistics
 
 patience: patience.o patience_game.o shuffle.o
 	$(CC) $(CFLAGS) $(LDFLAGS) patience.o patience_game.o shuffle.o -o patience $(LDLIBS)
@@ -29,4 +29,4 @@ shuffle.o: ../shuffle/shuffle.c
 
 
 clean:
-	rm -rf *.o patience
+	rm -rf *.o patience pstatistics

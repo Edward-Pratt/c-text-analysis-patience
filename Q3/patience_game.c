@@ -101,12 +101,12 @@ int play(int deck[], int verbose){
 	return 0; /* On Win */
 }
 
-
-int *shuffle_deck(int deck[], int seed){
+/*
+void shuffle_deck(int deck[], int seed){
 	gsl_rng *r;
 	r = shuffle(deck, 52, seed);
-	return deck;
+	free_shuffle(r);
 }
-
+*/
 
 			

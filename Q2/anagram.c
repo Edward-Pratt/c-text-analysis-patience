@@ -108,10 +108,12 @@ int main(int argc, char *argv[]) {
 
     printf("Generating histogram data...\n");
     int *variant_counts = generate_histogram_data(list, MAX_VARIANTS);
+
+    /*
     for (int i=0; i<= MAX_VARIANTS; i++){
 	printf("variant_counts[%d]: %d\n", i, variant_counts[i]);
     }
-
+    */
     double log_values[MAX_VARIANTS+1];
     for (int i = 0; i <= MAX_VARIANTS; i++) {
 	if (variant_counts[i] > 0){
