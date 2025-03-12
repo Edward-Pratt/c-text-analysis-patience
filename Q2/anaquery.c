@@ -88,6 +88,9 @@ int main(){
 
 	/*print_all_keys(list);*/	
 	char input[MAX_INPUT_SIZE];
+	
+	find_anagrams(list, "damned");
+	find_anagrams(list, "orchestra");
 
 	/* Continuously asks the user for a word input */
 	while(1){
