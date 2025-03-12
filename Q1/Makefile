@@ -3,6 +3,8 @@ CFLAGS = -std=c99
 LDFLAGS = -L.
 LDLIBS = -lm
 
+all: wordlengths demo_histogram
+
 wordlengths: wordlengths.o histogram.o readfile.o
 	$(CC) $(CFLAGS) $(LDFLAGS) wordlengths.o histogram.o readfile.o -o wordlengths $(LDLIBS)
 

@@ -7,22 +7,22 @@
 #include <stdio.h>
 #include <ctype.h>
 
+
+/* Linked List Node for storing words */
 typedef struct Node{
-    char *word;
-    struct Node *next;
+	char *word;
+	struct Node *next;
 } Node;
 
-
+/* Linked List Node for storing anagrams */
 typedef struct AnagramList{
-    char *key;
-    Node *words;
-    struct AnagramList *next;
+	char *key;
+	Node *words;
+	struct AnagramList *next;
 } AnagramList;
 
 
 Node *create_node(char *word);
-
-
 
 AnagramList *make_anagram_list(char **words, int n);
 

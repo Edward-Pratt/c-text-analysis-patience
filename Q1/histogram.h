@@ -1,4 +1,3 @@
-
 #ifndef __HISTOGRAM_H
 #define __HISTOGRAM_H
 
