@@ -45,7 +45,6 @@ int *many_plays(int N){
 		int result = play(deck, 0);	
 		remaining[result]++;
 	}
-
 	/* Frees memory used by shuffle */
 	free_shuffle(r);
 
@@ -64,7 +63,7 @@ int main() {
 	int N = 10000; // Play 10,000 games
 	int *results = many_plays(N);
 
-	/* Print statistics
+	/*	
 	   printf("Cards Left | Games Ended\n");
 	   printf("------------------------\n");
 	   for (int i = 0; i <= DECK_SIZE; i++) {
@@ -72,7 +71,7 @@ int main() {
 	   printf("%10d | %d\n", i, results[i]);
 	   }
 	   }
-	   */
+	*/  
 	
 	/* Calculates percentages for the histogram function to use */
 	double y[DECK_SIZE+1] = {0};
@@ -83,7 +82,7 @@ int main() {
 	}
 	
 	/* Prints a histogram */
-	histogram(results, y, DECK_SIZE, 50);
+	histogram(results, y, DECK_SIZE+1, 50);
 
 	return 0;
 }

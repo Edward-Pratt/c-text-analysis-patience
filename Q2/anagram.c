@@ -182,7 +182,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	histogram(variant_counts, log_values, MAX_VARIANTS, 50);
+	histogram(variant_counts, log_values, MAX_VARIANTS+1, 50);
 
 
 	/* Freeing Memory */
