@@ -9,7 +9,7 @@
 
 int add_to_11(int visible[], int size, int* x, int *y);
 
-int jqk(int visible[], int size);
+int jqk(int visible[], int size, int *jack_index, int *queen_index, int *king_index);
 
 int play(int deck[], int verbose);
 

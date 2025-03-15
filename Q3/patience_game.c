@@ -47,7 +47,7 @@ int add_to_11(int visible[], int size, int *x, int *y){
 }
 
 
-int jqk(int visible[], int size){
+int jqk(int visible[], int size, int *jack_index, int *queen_index, int *king_index){
 
 	/*
 	 *
@@ -59,6 +59,11 @@ int jqk(int visible[], int size){
 	 *
 	 *  size : The size of the visible cards
 	 *
+	 *  jack_index : The location that the jack has been found in visible cards
+	 *
+	 *	queen_index : The location that the queen has been found in visible cards
+	 *
+	 *	king_index : The location that the king has been found in visible cards
 	 *
 	 * Returns
 	 * -------
@@ -69,26 +74,29 @@ int jqk(int visible[], int size){
 	 *
 	 */
 
-	/* Initialises flag for each card type to 0 */
-	int hasJ = 0, hasQ = 0, hasK = 0;
+	/* Initialises location for each card type to -1 */
+	*jack_index = -1;
+	*queen_index = -1;
+	*king_index = -1;
 	int i;
+
 
 	/* Loops through all the visible cards */
 	for (i = 0; i < size; i++) {
 
 		/* If one of the cards is a Jack, Queen or King set the corresponding flag to 1 */
 		if (visible[i] == 11){
-			hasJ = 1;
+			*jack_index = i;
 		}
 		if (visible[i] == 12){ 
-			hasQ = 1;
+			*queen_index = i;
 		}
 		if (visible[i] == 13){ 
-			hasK = 1;
+			*king_index = i;
 		}
 	}
 	/* Returns 1 if all three flags are 1 */
-	return (hasJ && hasQ && hasK);
+	return (*jack_index != -1 && *queen_index != -1 && *king_index != -1);
 }
 
 
@@ -118,7 +126,7 @@ int play(int deck[], int verbose){
 	/* deck_index = Current card in the deck to draw, num_piles = Number of visible piles, cards_covered = Flag for if cards have been covered this round */
 	int deck_index = 0, num_piles = 0, cards_covered=0;
 
-
+	visible[num_piles++] = deck[deck_index++];
 	/* While the end of the deck has not been reached (Player wins) run rounds of patience */
 	while (deck_index < DECK_SIZE){
 
@@ -140,40 +148,18 @@ int play(int deck[], int verbose){
 		}
 
 		/* Covering cards if J Q and K are visible */
-		if(jqk(visible, num_piles)){
-			int foundJ = -1, foundQ = -1, foundK = -1;
-			int i;
-			/* Searches through visible cards and finds the first occurence of the Jack, Queen, and King */
-			for(i = 0; i < num_piles; i++){
-				if(visible[i] == 11 && foundJ == -1){
-					foundJ = i;
-				} else if(visible[i] == 12 && foundQ == -1){
-					foundQ = i;
-				} else if(visible[i] == 13 && foundK == -1){
-					foundK = i;
-				}
-			}
+		int jack_index, queen_index, king_index;
+		if(jqk(visible, num_piles, &jack_index, &queen_index, &king_index)) {
 
-			/* If an occurence of J, Q and K is found then replace them with new cards */
-			if (foundJ != -1 && foundQ != -1 && foundK != -1){
-				if (deck_index < DECK_SIZE){
-					visible[foundJ] = deck[deck_index++];
-				} else visible[foundJ] = 0;
+			/* Replacing cards at found index */
+			visible[jack_index] = deck_index < DECK_SIZE ? deck[deck_index++] : 0;
+			visible[queen_index] = deck_index < DECK_SIZE ? deck[deck_index++] : 0;
+			visible[king_index] = deck_index < DECK_SIZE ? deck[deck_index++] : 0;
 
-				if (deck_index < DECK_SIZE){
-					visible[foundQ] = deck[deck_index++];
-				} else visible[foundQ] = 0;
+			/* Sets the card_covered flag for this round */
+			cards_covered = 1;
 
-				if (deck_index < DECK_SIZE){ 
-					visible[foundK] = deck[deck_index++];
-				} else visible[foundK] = 0;
-
-				/* Sets the flag that cards have been covered to true for this round */
-				cards_covered = 1;
-
-				/* Go to the next round */
-				continue;
-			}		
+			continue;
 		}
 
 		int x, y;
