@@ -1,0 +1,9 @@
+*.o
+.idea/
+wordlengths
+demo_histogram
+anagram
+anaquery
+patience
+pstatistics
+shuffle/demo_shuffle
